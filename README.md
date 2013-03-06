@@ -1,0 +1,4 @@
+mysettings
+==========
+
+config files, etc.
