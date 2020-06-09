@@ -22,7 +22,12 @@ if [ `uname` == "Linux" ]; then
     export PATH=${HOME}/texlive/2020/bin/x86_64-linux:$PATH
 
 elif [ `uname` == "Darwin" ]; then
-    echo TODO: darwin specific
+    alias vlc='/Applications/VLC.app/Contents/MacOS/VLC'
+    alias gvim='/Applications/MacVim.app/Contents/bin/mvim'
+
+    # TODO should this be for both OSes?
+    export HISTSIZE=5000
+    export HISTFILESIZE=5000
 fi
 
 
@@ -61,4 +66,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
