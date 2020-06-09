@@ -27,3 +27,24 @@ pdfcropall() { find . -name "*.pdf" | xargs -P 8 -I@ pdfcrop @ @; }
 
 # Switch to Greek keyboard and back by holding both shifts.
 setxkbmap -layout "us,gr" -option "grp:shifts_toggle"
+
+export PATH=${HOME}/texlive/2020/bin/x86_64-linux:${HOME}/miniconda2/bin:$PATH
+
+export TEXINPUTS=".:~/tex:"
+
+export GH="https://github.com"  # fast clones
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/james/miniconda2/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/james/miniconda2/etc/profile.d/conda.sh" ]; then
+        . "/home/james/miniconda2/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/james/miniconda2/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
