@@ -1,17 +1,30 @@
-# Use system .bashrc skeleton for stuff like terminal colors.
-source /etc/skel/.bashrc
 
-# Clipboard simulation, similar to pbcopy/pbpaste on Mac OS.
-alias copy='xclip -selection c'
-alias paste='xclip -selection c -o'
-alias pasten='xclip -selection c -o; echo'
+if [ `uname` == "Linux" ]; then
+    # Use system .bashrc skeleton for stuff like terminal colors.
+    source /etc/skel/.bashrc
 
-# For seemingly-inevitable pulseaudio freakouts.
-alias fixsound='pulseaudio -k'
+    # Clipboard simulation, similar to pbcopy/pbpaste on Mac OS.
+    alias copy='xclip -selection c'
+    alias paste='xclip -selection c -o'
+    alias pasten='xclip -selection c -o; echo'
 
-# Try to mimic "open" command on Mac OS. Essentially, do what would happen if
-# we double-clicked on the file in a GUI.
-open () { xdg-open "$1" &> /dev/null & }
+    # Try to mimic "open" command on Mac OS. Essentially, do what would happen
+    # if we double-clicked on the file in a GUI.
+    open () { xdg-open "$1" &> /dev/null & }
+
+    # For seemingly-inevitable pulseaudio freakouts.
+    alias fixsound='pulseaudio -k'
+
+    # Switch to Greek keyboard and back by holding both shifts.
+    setxkbmap -layout "us,gr" -option "grp:shifts_toggle"
+
+    # TODO can we install texlive in a x-platform way to avoid this?
+    export PATH=${HOME}/texlive/2020/bin/x86_64-linux:$PATH
+
+elif [ `uname` == "Darwin" ]; then
+    echo TODO: darwin specific
+fi
+
 
 # Start an interactive Python3 with all my favorite libraries imported.
 alias pynp='python3 -i -c"import numpy as np; import numpy.linalg as la; \
@@ -25,10 +38,10 @@ latexmker () { latexmk -pdf -pvc $1 < /dev/null; }
 # Run pdfcrop on all .pdf files in the current directory.
 pdfcropall() { find . -name "*.pdf" | xargs -P 8 -I@ pdfcrop @ @; }
 
-# Switch to Greek keyboard and back by holding both shifts.
-setxkbmap -layout "us,gr" -option "grp:shifts_toggle"
+# Bitcraze toolbelt.
+alias tb='docker run --rm -it -e "HOST_CW_DIR=${PWD}" -e "CALLING_HOST_NAME=$(hostname)" -e "CALLING_UID"=$UID -e "CALLING_OS"=$(uname) -v ${PWD}:/tb-module -v ${HOME}/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock bitcraze/toolbelt'
 
-export PATH=${HOME}/texlive/2020/bin/x86_64-linux:${HOME}/miniconda2/bin:$PATH
+export PATH=${HOME}/miniconda2/bin:$PATH
 
 export TEXINPUTS=".:~/tex:"
 
@@ -48,3 +61,4 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
