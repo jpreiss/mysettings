@@ -48,7 +48,7 @@ alias tb='docker run --rm -it -e "HOST_CW_DIR=${PWD}" -e "CALLING_HOST_NAME=$(ho
 
 export PATH=${HOME}/miniconda2/bin:$PATH
 
-export TEXINPUTS=".:~/tex:"
+export TEXINPUTS=".:~/jplatex:"
 
 export GH="https://github.com"  # fast clones
 
