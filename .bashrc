@@ -46,23 +46,6 @@ pdfcropall() { find . -name "*.pdf" | xargs -P 8 -I@ pdfcrop @ @; }
 # Bitcraze toolbelt.
 alias tb='docker run --rm -it -e "HOST_CW_DIR=${PWD}" -e "CALLING_HOST_NAME=$(hostname)" -e "CALLING_UID"=$UID -e "CALLING_OS"=$(uname) -v ${PWD}:/tb-module -v ${HOME}/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock bitcraze/toolbelt'
 
-export PATH=${HOME}/miniconda2/bin:$PATH
-
 export TEXINPUTS=".:~/jplatex:"
 
 export GH="https://github.com"  # fast clones
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/james/miniconda2/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/james/miniconda2/etc/profile.d/conda.sh" ]; then
-        . "/home/james/miniconda2/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/james/miniconda2/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
