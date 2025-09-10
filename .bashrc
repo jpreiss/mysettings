@@ -43,6 +43,9 @@ latexmker () { latexmk -pdf -pvc $1 < /dev/null; }
 # Run pdfcrop on all .pdf files in the current directory.
 pdfcropall() { find . -name "*.pdf" | xargs -P 8 -I@ pdfcrop @ @; }
 
+# Copy newest $1 files from ~/Downloads to $2.
+mvdown() { ls -t ~/Downloads | head -$1 | xargs -I\{\} mv ~/Downloads/\{\} $2; }
+
 # Bitcraze toolbelt.
 alias tb='docker run --rm -it -e "HOST_CW_DIR=${PWD}" -e "CALLING_HOST_NAME=$(hostname)" -e "CALLING_UID"=$UID -e "CALLING_OS"=$(uname) -v ${PWD}:/tb-module -v ${HOME}/.ssh:/root/.ssh -v /var/run/docker.sock:/var/run/docker.sock bitcraze/toolbelt'
 
