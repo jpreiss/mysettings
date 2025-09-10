@@ -58,4 +58,4 @@ alias tb='docker run --rm -it -e "HOST_CW_DIR=${PWD}" -e "CALLING_HOST_NAME=$(ho
 
 export TEXINPUTS=".:~/jplatex:"
 
-export GH="https://github.com"  # fast clones
+export GH="git@github.com"  # fast clones
