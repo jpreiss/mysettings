@@ -43,6 +43,13 @@ latexmker () { latexmk -pdf -pvc $1 < /dev/null; }
 # Run pdfcrop on all .pdf files in the current directory.
 pdfcropall() { find . -name "*.pdf" | xargs -P 8 -I@ pdfcrop @ @; }
 
+# Run aspell on all .tex files in the current directory.
+aspelltex() { for f in *.tex; do aspell check -t \
+    --add-tex-command="citep op" \
+    --add-tex-command="citet op" \
+    --add-tex-command="Cref p" \
+    "$f"; done }
+
 # Copy newest $1 files from ~/Downloads to $2.
 mvdown() { ls -t ~/Downloads | head -$1 | xargs -I\{\} mv ~/Downloads/\{\} $2; }
 
